@@ -15,9 +15,9 @@ public class Listeners implements Listener{
 		if(it==null||it.getItemMeta()==null||it.getItemMeta().getDisplayName()==null)return;
 		if(event.getAction()==Action.RIGHT_CLICK_BLOCK||event.getAction()==Action.RIGHT_CLICK_AIR) {
 			if(event.getAction()==Action.RIGHT_CLICK_AIR) {
-				if(Stick.stickUse(it.getItemMeta().getDisplayName(),player,it,player.getLocation(),null)) event.setCancelled(true);
+				if(Stick.stickUse(it.getItemMeta().getDisplayName(),player,it,player.getLocation(),null,player.getInventory().getHeldItemSlot())) event.setCancelled(true);
 			}else {
-				if(Stick.stickUse(it.getItemMeta().getDisplayName(),player,it,player.getLocation(),event.getClickedBlock())) event.setCancelled(true);
+				if(Stick.stickUse(it.getItemMeta().getDisplayName(),player,it,player.getLocation(),event.getClickedBlock(),player.getInventory().getHeldItemSlot())) event.setCancelled(true);
 			}
 		}
 	}

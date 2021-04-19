@@ -65,7 +65,7 @@ public class Stick {
 	public static String getNameById(Integer inte) {
 		return idToName.get(inte);
 	}
-	public static void removeDurability(int durabilityRemove, ItemStack stickItem, Stick stick) {
+	public static void removeDurability(int durabilityRemove, ItemStack stickItem, Stick stick, int slot, Player player) {
 		List<String> list = stickItem.getItemMeta().getLore();
 		String dura = list.get(2).split("/")[0];
 		Integer duraInt=0;
@@ -78,7 +78,7 @@ public class Stick {
 		duraInt--;
 		if(duraInt<=0){
 			ItemMeta im=stickItem.getItemMeta();
-			im.setDisplayName("I break");
+			player.getInventory().clear(slot);
 			stickItem.setItemMeta(im);
 		}
 		ItemMeta im=stickItem.getItemMeta();
@@ -95,11 +95,11 @@ public class Stick {
 	public String getName() {
 		return _name;
 	}
-	public static boolean stickUse(String name, Player player, ItemStack stickItem, Location loc, Block block) {
+	public static boolean stickUse(String name, Player player, ItemStack stickItem, Location loc, Block block, int slot) {
 		for(Stick stick : listOfStick) {
 			if(name.contains(stick.getName())) {
 				stick._fonctionStickUse.accept(player, new ImmutablePair<Location, Block>(loc, block));
-				removeDurability(1, stickItem, stick);
+				removeDurability(1, stickItem, stick, slot, player);
 				return true;
 			}
 		}
